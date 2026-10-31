@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Unit tests need a Magento codebase for the framework classes. Point MAGENTO_ROOT at one
+    (the folder with vendor/autoload.php); without it the bootstrap looks for one above this module.
+-->
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.5/phpunit.xsd"
+         bootstrap="Test/Unit/bootstrap.php"
+         colors="true"
+         cacheDirectory=".phpunit.cache">
+    <testsuites>
+        <testsuite name="Faccelerate_Connect">
+            <directory>Test/Unit</directory>
+        </testsuite>
+    </testsuites>
+    <source>
+        <include>
+            <directory suffix=".php">Block</directory>
+            <directory suffix=".php">Model</directory>
+        </include>
+    </source>
+</phpunit>
