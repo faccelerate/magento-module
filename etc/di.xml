@@ -7,4 +7,29 @@
             </argument>
         </arguments>
     </type>
+    <type name="Magento\Framework\Console\CommandList">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="faccelerate_connect" xsi:type="object">Faccelerate\Connect\Console\Command\ConnectCommand</item>
+                <item name="faccelerate_status" xsi:type="object">Faccelerate\Connect\Console\Command\StatusCommand</item>
+                <item name="faccelerate_disconnect" xsi:type="object">Faccelerate\Connect\Console\Command\DisconnectCommand</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Faccelerate\Connect\Console\Command\ConnectCommand">
+        <arguments>
+            <argument name="connectService" xsi:type="object">Faccelerate\Connect\Model\Connection\ConnectService\Proxy</argument>
+            <argument name="backendUrl" xsi:type="object">Magento\Backend\Model\UrlInterface\Proxy</argument>
+        </arguments>
+    </type>
+    <type name="Faccelerate\Connect\Console\Command\StatusCommand">
+        <arguments>
+            <argument name="connectService" xsi:type="object">Faccelerate\Connect\Model\Connection\ConnectService\Proxy</argument>
+        </arguments>
+    </type>
+    <type name="Faccelerate\Connect\Console\Command\DisconnectCommand">
+        <arguments>
+            <argument name="connectService" xsi:type="object">Faccelerate\Connect\Model\Connection\ConnectService\Proxy</argument>
+        </arguments>
+    </type>
 </config>
