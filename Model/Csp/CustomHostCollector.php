@@ -11,7 +11,7 @@ use Magento\Csp\Model\Policy\FetchPolicy;
  * Allows the custom Faccelerate API origin (local development) in the CSP.
  * The two fixed hosts live in etc/csp_whitelist.xml.
  */
-final class CustomHostCollector implements PolicyCollectorInterface
+class CustomHostCollector implements PolicyCollectorInterface
 {
     private const DIRECTIVES = ['script-src', 'connect-src', 'img-src'];
 

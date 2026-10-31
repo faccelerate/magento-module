@@ -6,7 +6,7 @@ namespace Faccelerate\Connect\Model\Config\Source;
 use Faccelerate\Connect\Model\Config;
 use Magento\Framework\Data\OptionSourceInterface;
 
-final class Environment implements OptionSourceInterface
+class Environment implements OptionSourceInterface
 {
     /**
      * @inheritDoc
