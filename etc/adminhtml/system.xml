@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="faccelerate" translate="label" sortOrder="1000">
+            <label>Faccelerate</label>
+        </tab>
+        <section id="faccelerate" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <label>Faccelerate</label>
+            <tab>faccelerate</tab>
+            <resource>Faccelerate_Connect::config</resource>
+            <group id="connection" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>Connection</label>
+                <field id="panel" translate="label" type="button" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <frontend_model>Faccelerate\Connect\Block\Adminhtml\System\Config\Connection</frontend_model>
+                </field>
+            </group>
+            <group id="general" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>General</label>
+                <field id="enabled" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Master switch for everything Faccelerate adds to the storefront.</comment>
+                </field>
+                <field id="cro_key" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>CRO runtime key</label>
+                    <comment>Filled in automatically when you connect. Without a key nothing is added to the storefront.</comment>
+                </field>
+                <field id="environment" translate="label comment" type="select" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Faccelerate environment</label>
+                    <source_model>Faccelerate\Connect\Model\Config\Source\Environment</source_model>
+                    <comment>Leave on Production unless Faccelerate support tells you otherwise.</comment>
+                </field>
+                <field id="custom_api_url" translate="label comment" type="text" sortOrder="40" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Custom API URL</label>
+                    <validate>validate-url</validate>
+                    <comment>For local development only, for example http://host.docker.internal:8787</comment>
+                    <depends>
+                        <field id="environment">custom</field>
+                    </depends>
+                </field>
+            </group>
+            <group id="storefront" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Storefront</label>
+                <field id="load_on_checkout" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Load on checkout pages</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Turn this off if your PCI assessor objects to third-party scripts on the checkout.</comment>
+                </field>
+                <field id="purchase_event" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Send purchase event</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Pushes a GA4-style purchase event to the data layer on the order success page, once per order.</comment>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

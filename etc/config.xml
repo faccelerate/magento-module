@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <faccelerate>
+            <general>
+                <enabled>1</enabled>
+                <environment>production</environment>
+                <custom_api_url></custom_api_url>
+                <cro_key></cro_key>
+            </general>
+            <storefront>
+                <load_on_checkout>1</load_on_checkout>
+                <purchase_event>1</purchase_event>
+            </storefront>
+            <connection>
+                <integration_id></integration_id>
+                <status>none</status>
+                <workspace_name></workspace_name>
+                <connect_url></connect_url>
+            </connection>
+        </faccelerate>
+    </default>
+</config>
