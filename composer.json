@@ -1,0 +1,21 @@
+{
+    "name": "faccelerate/module-magento",
+    "description": "Faccelerate for Magento: connect your store to Faccelerate in one click and run the CRO and SEO agents on it.",
+    "type": "magento2-module",
+    "license": "OSL-3.0",
+    "require": {
+        "php": "~8.2.0||~8.3.0||~8.4.0||~8.5.0",
+        "magento/framework": "^103.0",
+        "magento/module-store": "*",
+        "magento/module-csp": "*",
+        "magento/module-integration": "*",
+        "magento/module-checkout": "*",
+        "magento/module-sales": "*",
+        "magento/module-config": "*",
+        "magento/module-backend": "*"
+    },
+    "autoload": {
+        "files": ["registration.php"],
+        "psr-4": { "Faccelerate\\Connect\\": "" }
+    }
+}
