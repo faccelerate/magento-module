@@ -1,0 +1,57 @@
+<?php
+/**
+ * @var \Faccelerate\Connect\Block\Adminhtml\System\Config\Connection $block
+ * @var \Magento\Framework\Escaper $escaper
+ */
+$block->handleReturn();
+$status = $block->getStatus();
+$isConnected = $status === \Faccelerate\Connect\Model\Config::STATUS_CONNECTED;
+$isPending = $status === \Faccelerate\Connect\Model\Config::STATUS_PENDING;
+$connectUrl = $block->getConnectUrl();
+?>
+<div class="faccelerate-connection-panel">
+    <?php if ($block->getError()): ?>
+        <div class="message message-error"><?= $escaper->escapeHtml($block->getError()) ?></div>
+    <?php endif; ?>
+
+    <p>
+        <strong><?= $escaper->escapeHtml(__('Status')) ?>:</strong>
+        <?= $escaper->escapeHtml($block->getStatusLabel()) ?>
+    </p>
+    <p>
+        <strong><?= $escaper->escapeHtml(__('Faccelerate API')) ?>:</strong>
+        <?= $escaper->escapeHtml($block->getApiBaseUrl()) ?>
+    </p>
+
+    <?php if ($isPending && $connectUrl): ?>
+        <p>
+            <a href="<?= $escaper->escapeUrl($connectUrl) ?>" class="action-default">
+                <?= $escaper->escapeHtml(__('Continue in Faccelerate')) ?>
+            </a>
+        </p>
+    <?php endif; ?>
+
+    <?php if (!$isConnected): ?>
+        <form method="post" action="<?= $escaper->escapeUrl($block->getActionUrl('connect')) ?>" class="faccelerate-action">
+            <input type="hidden" name="form_key" value="<?= $escaper->escapeHtmlAttr($block->getFormKey()) ?>"/>
+            <button type="submit" class="action-default primary">
+                <span><?= $escaper->escapeHtml($isPending ? __('Start again') : __('Connect to Faccelerate')) ?></span>
+            </button>
+        </form>
+    <?php endif; ?>
+
+    <?php if ($status !== \Faccelerate\Connect\Model\Config::STATUS_NONE): ?>
+        <form method="post" action="<?= $escaper->escapeUrl($block->getActionUrl('refresh')) ?>" class="faccelerate-action">
+            <input type="hidden" name="form_key" value="<?= $escaper->escapeHtmlAttr($block->getFormKey()) ?>"/>
+            <button type="submit" class="action-default">
+                <span><?= $escaper->escapeHtml(__('Check status')) ?></span>
+            </button>
+        </form>
+        <form method="post" action="<?= $escaper->escapeUrl($block->getActionUrl('disconnect')) ?>" class="faccelerate-action">
+            <input type="hidden" name="form_key" value="<?= $escaper->escapeHtmlAttr($block->getFormKey()) ?>"/>
+            <button type="submit" class="action-default">
+                <span><?= $escaper->escapeHtml(__('Disconnect')) ?></span>
+            </button>
+        </form>
+    <?php endif; ?>
+</div>
