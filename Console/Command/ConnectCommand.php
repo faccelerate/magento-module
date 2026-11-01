@@ -35,6 +35,7 @@ class ConnectCommand extends Command
     {
         try {
             $this->appState->setAreaCode(Area::AREA_ADMINHTML);
+        // phpcs:ignore Magento2.CodeAnalysis.EmptyBlock
         } catch (\Magento\Framework\Exception\LocalizedException) {
             // Area already set.
         }

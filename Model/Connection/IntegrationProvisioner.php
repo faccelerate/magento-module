@@ -126,6 +126,7 @@ class IntegrationProvisioner
         if ($consumerId > 0) {
             try {
                 $this->oauthService->deleteConsumer($consumerId);
+            // phpcs:ignore Magento2.CodeAnalysis.EmptyBlock
             } catch (LocalizedException) {
                 // Already gone with the integration.
             }

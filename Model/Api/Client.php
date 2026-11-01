@@ -78,6 +78,7 @@ class Client
 
         if ($credentials !== null) {
             // The signed path is the real request path (a custom API URL may carry a prefix), without host and query.
+            // phpcs:ignore Magento2.Functions.DiscouragedFunction -- plain split of a foreign URL
             $path = (string)parse_url($url, PHP_URL_PATH);
             $headers = $this->signer->headers($credentials[0], $credentials[1], $method, $path, $this->now());
             foreach ($headers as $name => $value) {

@@ -11,8 +11,10 @@ $roots = [];
 if (getenv('MAGENTO_ROOT')) {
     $roots[] = getenv('MAGENTO_ROOT');
 }
-for ($dir = dirname($moduleRoot); $dir !== dirname($dir); $dir = dirname($dir)) {
+$dir = dirname($moduleRoot);
+while ($dir !== dirname($dir)) {
     $roots[] = $dir;
+    $dir = dirname($dir);
 }
 
 foreach ($roots as $root) {
@@ -23,5 +25,4 @@ foreach ($roots as $root) {
     }
 }
 
-fwrite(STDERR, "Set MAGENTO_ROOT to a Magento installation with vendor/autoload.php.\n");
-exit(1);
+throw new RuntimeException("Set MAGENTO_ROOT to a Magento installation with vendor/autoload.php.");

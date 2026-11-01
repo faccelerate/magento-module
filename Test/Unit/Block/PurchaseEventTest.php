@@ -13,7 +13,7 @@ use Magento\Sales\Model\Order;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
-final class PurchaseEventTest extends TestCase
+class PurchaseEventTest extends TestCase
 {
     private function block(
         bool $enabled,

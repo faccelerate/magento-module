@@ -22,7 +22,7 @@ use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
 
 #[AllowMockObjectsWithoutExpectations]
-final class ConnectServiceTest extends TestCase
+class ConnectServiceTest extends TestCase
 {
     private Client&MockObject $client;
     private IntegrationProvisioner&MockObject $provisioner;

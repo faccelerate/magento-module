@@ -6,7 +6,7 @@ namespace Faccelerate\Connect\Test\Unit\Model\Api;
 use Faccelerate\Connect\Model\Api\Signer;
 use PHPUnit\Framework\TestCase;
 
-final class SignerTest extends TestCase
+class SignerTest extends TestCase
 {
     private const SECRET = 'consumer-secret-123';
     private const TIMESTAMP = 1730000000;

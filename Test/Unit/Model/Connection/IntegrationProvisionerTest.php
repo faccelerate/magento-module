@@ -17,7 +17,7 @@ use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 #[AllowMockObjectsWithoutExpectations]
-final class IntegrationProvisionerTest extends TestCase
+class IntegrationProvisionerTest extends TestCase
 {
     private IntegrationServiceInterface&MockObject $integrationService;
     private AuthorizationServiceInterface&MockObject $authorizationService;

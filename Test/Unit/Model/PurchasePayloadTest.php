@@ -9,7 +9,7 @@ use Magento\Sales\Model\Order\Item;
 use PHPUnit\Framework\MockObject\Stub;
 use PHPUnit\Framework\TestCase;
 
-final class PurchasePayloadTest extends TestCase
+class PurchasePayloadTest extends TestCase
 {
     /**
      * @param Item[] $items

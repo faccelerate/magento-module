@@ -11,7 +11,7 @@ use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\MockObject\Stub;
 use PHPUnit\Framework\TestCase;
 
-final class ConfigTest extends TestCase
+class ConfigTest extends TestCase
 {
     private ScopeConfigInterface&Stub $scopeConfig;
     private Config $config;

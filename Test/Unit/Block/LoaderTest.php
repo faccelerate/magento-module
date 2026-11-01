@@ -14,7 +14,7 @@ use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\MockObject\Stub;
 use PHPUnit\Framework\TestCase;
 
-final class LoaderTest extends TestCase
+class LoaderTest extends TestCase
 {
     private Config&Stub $config;
     private Http&Stub $request;

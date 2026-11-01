@@ -9,7 +9,7 @@ use Magento\Csp\Model\Policy\FetchPolicy;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
-final class CustomHostCollectorTest extends TestCase
+class CustomHostCollectorTest extends TestCase
 {
     private function collector(string $environment, string $apiBaseUrl): CustomHostCollector
     {

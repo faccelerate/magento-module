@@ -43,6 +43,7 @@ class CustomHostCollector implements PolicyCollectorInterface
             return null;
         }
 
+        // phpcs:ignore Magento2.Functions.DiscouragedFunction -- plain split of a foreign URL
         $parts = parse_url($this->config->getApiBaseUrl());
         if (!is_array($parts) || !isset($parts['scheme'], $parts['host'])
             || !in_array($parts['scheme'], ['http', 'https'], true)
