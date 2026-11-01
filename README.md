@@ -108,12 +108,12 @@ This is not legal or compliance advice. Ask your assessor.
 
 Connecting creates one Magento integration named `Faccelerate` with these ACL resources, and no others:
 
-- `Magento_Backend::store` and `Magento_Config::config`: read store and configuration data
-- `Magento_Catalog::products` and `Magento_Catalog::categories`: read the catalog
-- `Magento_Sales::sales_order` (with actions and view): read orders
-- `Magento_Cms::page` and `Magento_Cms::block`: read CMS pages and blocks
+- `Magento_Backend::store` and `Magento_Config::config`: store and configuration data
+- `Magento_Catalog::products` and `Magento_Catalog::categories`: the catalog
+- `Magento_Sales::sales_order` (with actions and view): orders
+- `Magento_Cms::page` and `Magento_Cms::block`: CMS pages and blocks
 
-Faccelerate reads this data to measure your shop and to write product texts. It writes only product texts that you or your team approved in Faccelerate. It does not change prices, stock, orders, customers or settings.
+Magento ACL resources do not separate reading from writing, so these permissions allow both. Faccelerate reads this data to measure your shop and to write product texts. It writes only product texts that you or your team approved in Faccelerate.
 
 Faccelerate signs its requests with OAuth 1.0a. You do not need to change `oauth/consumer/enable_integration_as_bearer`. You can see and delete the integration under **System → Extensions → Integrations**. Deleting it revokes access at once.
 

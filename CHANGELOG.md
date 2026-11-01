@@ -29,5 +29,3 @@ First release.
 
 - Magento Open Source / Adobe Commerce 2.4.7 to 2.4.9, Mage-OS 2.x and 3.x,
   PHP 8.2 to 8.5. Luma tested; Hyvä not verified yet.
-
-[0.1.0]: https://github.com/faccelerate/magento-module/releases/tag/0.1.0
