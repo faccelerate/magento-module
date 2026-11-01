@@ -1,0 +1,8 @@
+# Keep the Composer / Marketplace package small.
+/.github/ export-ignore
+/Test/ export-ignore
+/phpunit.xml.dist export-ignore
+/phpstan.neon.dist export-ignore
+/CONTRACT.md export-ignore
+/.gitattributes export-ignore
+/.gitignore export-ignore
