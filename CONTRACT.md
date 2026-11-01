@@ -95,7 +95,7 @@ token.
 3. **Status (module, on the config page and after the redirect).**
 
    `GET {apiBase}/x/magento/link` (signed, see below)
-   → `200 {"status": "pending"|"connected"|"disconnected", "workspace_name": "…"|null, "cro_key": "fx…"|null, "environment": "production"|"staging"|"local"}`.
+   → `200 {"status": "pending"|"expired"|"connected"|"disconnected", "workspace_name": "…"|null, "cro_key": "fx…"|null, "environment": "production"|"staging"|"local"}`.
    On `connected` the module saves `cro_key` and `workspace_name`, status
    `connected`.
 
