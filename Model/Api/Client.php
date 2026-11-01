@@ -44,7 +44,7 @@ class Client
     /**
      * GET /x/magento/link (signed).
      *
-     * @return array{status: string, workspace_name: ?string, cro_key: ?string, environment: string}
+     * @return array{status?: string, workspace_name?: ?string, cro_key?: ?string, environment?: string}
      * @throws ApiException
      */
     public function link(string $consumerKey, string $consumerSecret): array
@@ -55,7 +55,7 @@ class Client
     /**
      * POST /x/magento/disconnect (signed).
      *
-     * @return array{status: string}
+     * @return array{status?: string}
      * @throws ApiException
      */
     public function disconnect(string $consumerKey, string $consumerSecret): array
@@ -93,7 +93,10 @@ class Client
                 $curl->get($url);
             }
         } catch (\Throwable $e) {
-            throw new ApiException(new Phrase('Faccelerate could not be reached: %1', [$e->getMessage()]), $e);
+            throw new ApiException(
+                new Phrase('Faccelerate could not be reached: %1', [$e->getMessage()]),
+                $e instanceof \Exception ? $e : null
+            );
         }
 
         return $this->parse($curl->getStatus(), (string)$curl->getBody());

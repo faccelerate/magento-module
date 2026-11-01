@@ -1,0 +1,13 @@
+# PHPStan for CI: run from a Magento root that has this module installed.
+# bitexpert/phpstan-magento teaches PHPStan about generated classes and proxies.
+includes:
+    - vendor/bitexpert/phpstan-magento/extension.neon
+
+parameters:
+    level: 5
+    paths:
+        - Block
+        - Console
+        - Controller
+        - Model
+        - Setup

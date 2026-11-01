@@ -47,7 +47,7 @@ class Connection extends Field
      */
     public function render(AbstractElement $element): string
     {
-        $this->setElement($element);
+        $this->setData('element', $element);
 
         return $this->_decorateRowHtml(
             $element,

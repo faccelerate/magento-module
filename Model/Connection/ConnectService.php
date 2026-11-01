@@ -51,6 +51,7 @@ class ConnectService
         if (!$store) {
             throw new LocalizedException(new Phrase('This shop has no store view to connect.'));
         }
+        /** @var \Magento\Store\Model\Store $store the store model has getBaseUrl() and getGroup() */
 
         $response = $this->client->register([
             'store_base_url' => $store->getBaseUrl(UrlInterface::URL_TYPE_WEB),
