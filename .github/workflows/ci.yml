@@ -90,6 +90,9 @@ jobs:
       matrix: ${{ fromJSON(needs.compute-matrix.outputs.matrix) }}
     env:
       MAGENTO_DIRECTORY: ../magento2
+      # 2.4.7 pins packages that now have security advisories (league/flysystem 2.x);
+      # Composer 2.9 refuses those by default. This is a test install, not a shop.
+      COMPOSER_NO_SECURITY_BLOCKING: "1"
     steps:
       - uses: actions/checkout@v6
 
@@ -103,6 +106,8 @@ jobs:
           package_name: faccelerate/module-magento
           source_folder: ${{ github.workspace }}
           magento_directory: ${{ env.MAGENTO_DIRECTORY }}
+          # Mage-OS releases live on repo.mage-os.org; Magento on the Mage-OS mirror.
+          magento_repository: ${{ startsWith(matrix.magento, 'mage-os/') && 'https://repo.mage-os.org/' || 'https://mirror.mage-os.org/' }}
 
       - name: Enable all modules and compile (setup:di:compile)
         working-directory: ${{ env.MAGENTO_DIRECTORY }}
