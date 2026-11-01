@@ -69,6 +69,9 @@ class LoaderTest extends TestCase
         ];
     }
 
+    /**
+     * @dataProvider renderProvider
+     */
     #[DataProvider('renderProvider')]
     public function testShouldRender(bool $enabled, string $key, bool $onCheckout, string $action, bool $expected): void
     {

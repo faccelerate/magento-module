@@ -52,6 +52,9 @@ class CustomHostCollectorTest extends TestCase
         ];
     }
 
+    /**
+     * @dataProvider nothingToAddProvider
+     */
     #[DataProvider('nothingToAddProvider')]
     public function testLeavesPoliciesAloneOtherwise(string $environment, string $apiBaseUrl): void
     {

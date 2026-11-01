@@ -55,6 +55,9 @@ class ConfigTest extends TestCase
         ];
     }
 
+    /**
+     * @dataProvider apiBaseUrlProvider
+     */
     #[DataProvider('apiBaseUrlProvider')]
     public function testApiBaseUrl(string $environment, string $customUrl, string $expected): void
     {

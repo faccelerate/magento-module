@@ -83,6 +83,9 @@ class PurchaseEventTest extends TestCase
         ];
     }
 
+    /**
+     * @dataProvider switchedOffProvider
+     */
     #[DataProvider('switchedOffProvider')]
     public function testNothingWhenSwitchedOffOrNotConnected(bool $enabled, bool $event, string $key): void
     {
