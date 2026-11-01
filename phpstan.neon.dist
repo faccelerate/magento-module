@@ -1,7 +1,8 @@
-# PHPStan for CI: run from a Magento root that has this module installed.
+# PHPStan for CI: run it with the phpstan binary of a Magento root that has this module installed
+# (vendor/phpstan/phpstan, so %rootDir%/../.. is that root's vendor folder).
 # bitexpert/phpstan-magento teaches PHPStan about generated classes and proxies.
 includes:
-    - vendor/bitexpert/phpstan-magento/extension.neon
+    - %rootDir%/../../bitexpert/phpstan-magento/extension.neon
 
 parameters:
     level: 5

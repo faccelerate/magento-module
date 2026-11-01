@@ -1,0 +1,126 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  composer:
+    name: composer validate
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          tools: composer:v2
+          coverage: none
+      # Not --strict: the "*" constraints on magento/module-* are the Magento convention
+      # (Mage-OS replaces those packages), composer only warns about them.
+      - run: composer validate
+      - name: composer.json has no "version" (tags drive versions on Packagist)
+        run: "! grep -q '\"version\"' composer.json"
+
+  coding-standard:
+    name: phpcs (Magento2)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      # Same bar as the Magento Marketplace technical review: nothing of severity 7 or higher
+      # (all errors, plus the warnings that matter). Docblock style warnings are not enforced.
+      - uses: mage-os/github-actions/coding-standard@v1.7.3
+        with:
+          php_version: '8.3'
+          path: .
+          severity: '7'
+
+  compute-matrix:
+    name: compute matrix
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.combine.outputs.matrix }}
+    steps:
+      # No tag of mage-os/github-actions after v1.7.3 exists yet, and v1.7.3 does not know
+      # Magento 2.4.9 or Mage-OS 3/4. This pin is the commit of main of 2026-10-30; move it to a tag
+      # as soon as one newer than v1.7.3 is released.
+      - uses: mage-os/github-actions/supported-version@9038346867d50375fd0c7427755d3e9496abbbd1
+        id: magento
+        with:
+          kind: currently-supported
+          project: magento-open-source
+      - uses: mage-os/github-actions/supported-version@9038346867d50375fd0c7427755d3e9496abbbd1
+        id: mageos-current
+        with:
+          kind: currently-supported
+          project: mage-os
+      - uses: mage-os/github-actions/supported-version@9038346867d50375fd0c7427755d3e9496abbbd1
+        id: mageos-3
+        with:
+          kind: custom
+          project: mage-os
+          custom_versions: mage-os/project-community-edition:3.0.0
+      - name: Combine
+        id: combine
+        env:
+          MAGENTO: ${{ steps.magento.outputs.matrix }}
+          MAGEOS_CURRENT: ${{ steps.mageos-current.outputs.matrix }}
+          MAGEOS_3: ${{ steps.mageos-3.outputs.matrix }}
+        run: |
+          matrix=$(jq -c -n \
+            --argjson a "$MAGENTO" --argjson b "$MAGEOS_CURRENT" --argjson c "$MAGEOS_3" \
+            '{include: ($a.include + $b.include + $c.include)}')
+          echo "matrix=$matrix" >> "$GITHUB_OUTPUT"
+          echo "$matrix" | jq '.include[] | {magento, php, composer}'
+
+  magento:
+    name: ${{ matrix.magento }} (PHP ${{ matrix.php }})
+    needs: compute-matrix
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJSON(needs.compute-matrix.outputs.matrix) }}
+    env:
+      MAGENTO_DIRECTORY: ../magento2
+    steps:
+      - uses: actions/checkout@v6
+
+      # Creates a Magento / Mage-OS project, adds this folder as a path repository and
+      # runs composer require faccelerate/module-magento.
+      - uses: mage-os/github-actions/installation-test@v1.7.3
+        with:
+          php_version: ${{ matrix.php }}
+          composer_version: ${{ matrix.composer }}
+          magento_version: ${{ matrix.magento }}
+          package_name: faccelerate/module-magento
+          source_folder: ${{ github.workspace }}
+          magento_directory: ${{ env.MAGENTO_DIRECTORY }}
+
+      - name: Enable all modules and compile (setup:di:compile)
+        working-directory: ${{ env.MAGENTO_DIRECTORY }}
+        run: |
+          php -d memory_limit=-1 bin/magento module:enable --all
+          php -d memory_limit=-1 bin/magento setup:di:compile
+
+      - name: Unit tests
+        working-directory: ${{ env.MAGENTO_DIRECTORY }}
+        env:
+          MAGENTO_ROOT: ${{ github.workspace }}/../magento2
+        run: vendor/bin/phpunit -c "${{ github.workspace }}/phpunit.xml.dist"
+
+      - name: PHPStan (level 5)
+        working-directory: ${{ env.MAGENTO_DIRECTORY }}
+        run: |
+          composer require --dev --no-interaction phpstan/phpstan bitexpert/phpstan-magento
+          vendor/bin/phpstan analyse \
+            --configuration="${{ github.workspace }}/phpstan.neon.dist" \
+            --autoload-file=vendor/autoload.php \
+            --memory-limit=-1 --no-progress
