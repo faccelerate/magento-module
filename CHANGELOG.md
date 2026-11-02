@@ -4,6 +4,13 @@ All notable changes to this module are listed here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the project uses
 [Semantic Versioning](https://semver.org/).
 
+## [0.1.1] - 2026-11-02
+
+### Fixed
+- Connect, Check status and Disconnect on Stores → Configuration → Faccelerate did nothing but save the
+  configuration: the panel's own forms sat inside the configuration page's form, which browsers drop. The
+  buttons now open a small confirm page with its own form. Found while connecting luma.mediya.dev.
+
 ## [0.1.0] - 2026-11-01
 
 First release.

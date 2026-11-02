@@ -1,0 +1,17 @@
+<?php
+/**
+ * @var \Faccelerate\Connect\Block\Adminhtml\Connection\Confirm $block
+ * @var \Magento\Framework\Escaper $escaper
+ */
+?>
+<div class="faccelerate-confirm">
+    <h2><?= $escaper->escapeHtml($block->getHeading()) ?></h2>
+    <p><?= $escaper->escapeHtml($block->getExplanation()) ?></p>
+    <form method="post" action="<?= $escaper->escapeUrl($block->getPostUrl()) ?>">
+        <input type="hidden" name="form_key" value="<?= $escaper->escapeHtmlAttr($block->getFormKey()) ?>"/>
+        <button type="submit" class="action-default<?= $block->isDestructive() ? '' : ' primary' ?>">
+            <span><?= $escaper->escapeHtml($block->getButtonLabel()) ?></span>
+        </button>
+        <a href="<?= $escaper->escapeUrl($block->getBackUrl()) ?>" class="action-default"><?= $escaper->escapeHtml(__('Cancel')) ?></a>
+    </form>
+</div>

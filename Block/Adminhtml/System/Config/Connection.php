@@ -128,4 +128,13 @@ class Connection extends Field
     {
         return $this->getUrl('faccelerate/connection/' . $action);
     }
+
+    /**
+     * The panel sits inside the configuration page's form, where a nested form would be dropped, so its buttons
+     * link to a confirm page that has its own form.
+     */
+    public function getConfirmUrl(string $action): string
+    {
+        return $this->getUrl('faccelerate/connection/confirm', ['do' => $action]);
+    }
 }

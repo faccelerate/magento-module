@@ -32,26 +32,17 @@ $connectUrl = $block->getConnectUrl();
     <?php endif; ?>
 
     <?php if (!$isConnected): ?>
-        <form method="post" action="<?= $escaper->escapeUrl($block->getActionUrl('connect')) ?>" class="faccelerate-action">
-            <input type="hidden" name="form_key" value="<?= $escaper->escapeHtmlAttr($block->getFormKey()) ?>"/>
-            <button type="submit" class="action-default primary">
-                <span><?= $escaper->escapeHtml($isPending ? __('Start again') : __('Connect to Faccelerate')) ?></span>
-            </button>
-        </form>
+        <a href="<?= $escaper->escapeUrl($block->getConfirmUrl('connect')) ?>" class="action-default primary">
+            <?= $escaper->escapeHtml($isPending ? __('Start again') : __('Connect to Faccelerate')) ?>
+        </a>
     <?php endif; ?>
 
     <?php if ($status !== \Faccelerate\Connect\Model\Config::STATUS_NONE): ?>
-        <form method="post" action="<?= $escaper->escapeUrl($block->getActionUrl('refresh')) ?>" class="faccelerate-action">
-            <input type="hidden" name="form_key" value="<?= $escaper->escapeHtmlAttr($block->getFormKey()) ?>"/>
-            <button type="submit" class="action-default">
-                <span><?= $escaper->escapeHtml(__('Check status')) ?></span>
-            </button>
-        </form>
-        <form method="post" action="<?= $escaper->escapeUrl($block->getActionUrl('disconnect')) ?>" class="faccelerate-action">
-            <input type="hidden" name="form_key" value="<?= $escaper->escapeHtmlAttr($block->getFormKey()) ?>"/>
-            <button type="submit" class="action-default">
-                <span><?= $escaper->escapeHtml(__('Disconnect')) ?></span>
-            </button>
-        </form>
+        <a href="<?= $escaper->escapeUrl($block->getConfirmUrl('refresh')) ?>" class="action-default">
+            <?= $escaper->escapeHtml(__('Check status')) ?>
+        </a>
+        <a href="<?= $escaper->escapeUrl($block->getConfirmUrl('disconnect')) ?>" class="action-default">
+            <?= $escaper->escapeHtml(__('Disconnect')) ?>
+        </a>
     <?php endif; ?>
 </div>
