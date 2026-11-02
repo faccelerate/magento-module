@@ -32,7 +32,6 @@ class Confirm extends AbstractConnection implements HttpGetActionInterface
         }
 
         $page = $this->pageFactory->create();
-        $page->setActiveMenu('Magento_Config::system_config');
         $page->getConfig()->getTitle()->prepend((string)__('Faccelerate'));
 
         return $page;
