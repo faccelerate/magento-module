@@ -9,12 +9,20 @@
         </policy>
         <policy id="connect-src">
             <values>
+                <!-- GA4 sends hits to regional hosts such as region1.google-analytics.com, which Magento's
+                     Google tag whitelist leaves out; the checkout's enforced policy then drops every hit there. -->
+                <value id="faccelerate-ga4-regional" type="host">*.google-analytics.com</value>
+                <value id="faccelerate-ga4-regional-analytics" type="host">*.analytics.google.com</value>
                 <value id="faccelerate-api" type="host">api.faccelerate.ai</value>
                 <value id="faccelerate-api-staging" type="host">api-staging.faccelerate.ai</value>
             </values>
         </policy>
         <policy id="img-src">
             <values>
+                <!-- GA4 sends hits to regional hosts such as region1.google-analytics.com, which Magento's
+                     Google tag whitelist leaves out; the checkout's enforced policy then drops every hit there. -->
+                <value id="faccelerate-ga4-regional" type="host">*.google-analytics.com</value>
+                <value id="faccelerate-ga4-regional-analytics" type="host">*.analytics.google.com</value>
                 <value id="faccelerate-api" type="host">api.faccelerate.ai</value>
                 <value id="faccelerate-api-staging" type="host">api-staging.faccelerate.ai</value>
             </values>

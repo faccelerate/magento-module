@@ -4,6 +4,14 @@ All notable changes to this module are listed here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the project uses
 [Semantic Versioning](https://semver.org/).
 
+## [0.2.1] - 2026-11-03
+
+### Fixed
+- No GA4 hit left the checkout: Magento enforces its Content Security Policy there, and its Google tag whitelist
+  does not hold the regional hosts GA4 sends to (`region1.google-analytics.com`). The module now whitelists
+  `*.google-analytics.com` and `*.analytics.google.com` for connect-src and img-src, so `begin_checkout` and the
+  checkout's own page views reach GA4. Found on luma.mediya.dev.
+
 ## [0.2.0] - 2026-11-03
 
 ### Added
