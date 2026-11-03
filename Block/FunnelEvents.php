@@ -10,6 +10,7 @@ use Magento\Checkout\Model\Session as CheckoutSession;
 use Magento\Framework\View\Element\Template;
 use Magento\Framework\View\Element\Template\Context;
 use Magento\Framework\View\Helper\SecureHtmlRenderer;
+use Magento\Store\Model\Store;
 
 /**
  * Sends the GA4 ecommerce funnel events Magento's own Google tag leaves out: view_item on product pages,
@@ -150,7 +151,9 @@ JS;
 
     private function currency(): string
     {
-        return (string)$this->_storeManager->getStore()->getCurrentCurrencyCode();
+        $store = $this->_storeManager->getStore();
+
+        return $store instanceof Store ? (string)$store->getCurrentCurrencyCode() : '';
     }
 
     private function json(mixed $value): ?string
