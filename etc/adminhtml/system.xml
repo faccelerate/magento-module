@@ -52,6 +52,11 @@
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                     <comment>Pushes a GA4-style purchase event to the data layer on the order success page, once per order.</comment>
                 </field>
+                <field id="funnel_events" translate="label comment" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Send GA4 funnel events</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Sends view_item, add_to_cart and begin_checkout to your GA4 tag, which Magento's own Google tag does not. Turn this off if another extension or Tag Manager already sends them.</comment>
+                </field>
             </group>
         </section>
     </system>

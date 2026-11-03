@@ -4,5 +4,12 @@
         <referenceContainer name="head.additional">
             <block class="Faccelerate\Connect\Block\Loader" name="faccelerate.loader" template="Faccelerate_Connect::loader.phtml"/>
         </referenceContainer>
+        <referenceContainer name="before.body.end">
+            <block class="Faccelerate\Connect\Block\FunnelEvents" name="faccelerate.funnel.add_to_cart" template="Faccelerate_Connect::funnel_events.phtml">
+                <arguments>
+                    <argument name="event" xsi:type="string">add_to_cart</argument>
+                </arguments>
+            </block>
+        </referenceContainer>
     </body>
 </page>

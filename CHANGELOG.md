@@ -4,6 +4,15 @@ All notable changes to this module are listed here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the project uses
 [Semantic Versioning](https://semver.org/).
 
+## [0.2.0] - 2026-11-03
+
+### Added
+- GA4 funnel events through the store's Google tag: `view_item` on product pages, `add_to_cart` after an AJAX add
+  to cart, and `begin_checkout` on the checkout. Magento's own Google tag sends page views and purchases only, so
+  GA4 had no middle of the funnel. Each event waits for the Google tag's `config` before it is sent. Switch them off
+  with **Send GA4 funnel events = No**. Needs Luma or a Luma-based theme (jQuery and RequireJS); Hyvä is not
+  covered yet.
+
 ## [0.1.1] - 2026-11-02
 
 ### Fixed

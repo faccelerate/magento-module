@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="before.body.end">
+            <block class="Faccelerate\Connect\Block\FunnelEvents" name="faccelerate.funnel.view_item" template="Faccelerate_Connect::funnel_events.phtml" before="faccelerate.funnel.add_to_cart">
+                <arguments>
+                    <argument name="event" xsi:type="string">view_item</argument>
+                </arguments>
+            </block>
+        </referenceContainer>
+    </body>
+</page>

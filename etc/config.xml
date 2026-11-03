@@ -11,6 +11,7 @@
             <storefront>
                 <load_on_checkout>1</load_on_checkout>
                 <purchase_event>1</purchase_event>
+                <funnel_events>1</funnel_events>
             </storefront>
             <connection>
                 <integration_id></integration_id>

@@ -10,6 +10,7 @@ Composer package: `faccelerate/module-magento`. License: OSL-3.0.
 - **CRO loader on every page.** A small script (`/x/cro/loader.js`) is added to the head of every storefront page, including the checkout. It is the same for every visitor, so it works with the full page cache and Varnish. It follows your Content Security Policy: the Faccelerate hosts are whitelisted for `script-src`, `connect-src` and `img-src`.
 - **"Not on checkout" switch.** One setting keeps the loader off the checkout pages. See [PCI DSS](#pci-dss-643).
 - **Purchase event.** On the order success page the module pushes a GA4-style `purchase` event to `window.dataLayer`, once per order.
+- **GA4 funnel events.** `view_item` on product pages, `add_to_cart` after an AJAX add to cart and `begin_checkout` on the checkout, sent through the store's Google tag (Stores → Configuration → Sales → Google API). Magento's own tag sends page views and purchases only.
 - **CLI commands.** `bin/magento faccelerate:connect`, `faccelerate:status` and `faccelerate:disconnect`.
 
 ## Requirements
@@ -64,6 +65,7 @@ All under **Stores → Configuration → Faccelerate**.
 | CRO runtime key | filled by connect | Without a key, nothing is added to the storefront. |
 | Load on checkout pages | Yes | Turn off to keep the loader off the checkout. |
 | Send purchase event | Yes | The `purchase` event on the order success page. |
+| Send GA4 funnel events | Yes | `view_item`, `add_to_cart` and `begin_checkout` through the store's Google tag. Luma-based themes only. |
 | Faccelerate environment | Production | Leave it on Production unless Faccelerate support says otherwise. |
 
 ## Update
@@ -120,7 +122,7 @@ Faccelerate signs its requests with OAuth 1.0a. You do not need to change `oauth
 ## Privacy
 
 - The CRO loader sets a first-party cookie, `fx_uid`, to recognise a returning visitor in an experiment.
-- The purchase event holds the order id, totals (value, tax, shipping, currency) and, per item, the id, name, price and quantity. It holds no name, email, address or other personal data.
+- The purchase event holds the order id, totals (value, tax, shipping, currency) and, per item, the id, name, price and quantity. It holds no name, email, address or other personal data. The funnel events hold the same product fields (id, name, price, quantity) and the cart value.
 - Check with your legal team whether the loader and its cookie need to be in your cookie banner.
 
 ## Support

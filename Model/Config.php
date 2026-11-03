@@ -34,6 +34,7 @@ class Config
     public const PATH_CRO_KEY = 'faccelerate/general/cro_key';
     public const PATH_LOAD_ON_CHECKOUT = 'faccelerate/storefront/load_on_checkout';
     public const PATH_PURCHASE_EVENT = 'faccelerate/storefront/purchase_event';
+    public const PATH_FUNNEL_EVENTS = 'faccelerate/storefront/funnel_events';
     public const PATH_INTEGRATION_ID = 'faccelerate/connection/integration_id';
     public const PATH_STATUS = 'faccelerate/connection/status';
     public const PATH_WORKSPACE_NAME = 'faccelerate/connection/workspace_name';
@@ -97,6 +98,11 @@ class Config
     public function purchaseEventEnabled(?int $storeId = null): bool
     {
         return $this->scopeConfig->isSetFlag(self::PATH_PURCHASE_EVENT, ScopeInterface::SCOPE_STORE, $storeId);
+    }
+
+    public function funnelEventsEnabled(?int $storeId = null): bool
+    {
+        return $this->scopeConfig->isSetFlag(self::PATH_FUNNEL_EVENTS, ScopeInterface::SCOPE_STORE, $storeId);
     }
 
     public function getIntegrationId(): ?int
